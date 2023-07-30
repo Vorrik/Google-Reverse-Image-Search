@@ -2,7 +2,7 @@ def build_f_req(id_1: str, id_2: str):
     return rf'[[["B7fdke","[[\"{id_1}\",1,1],[null,null,null,null,null,null,' \
            r'[\"\"],' \
            rf'[\"{id_2}\",[null,null,0,0]]],[null,null,' \
-           r'null,null,3,[\"ru\",null,\"US\",\"Europe/Moscow\"],null,null,[null,null,null,null,null,null,null,null,' \
+           r'null,null,3,[\"en-US\",null,\"US\",\"Europe/Moscow\"],null,null,[null,null,null,null,null,null,null,null,' \
            r'null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,' \
            r'null,null,null,null,null,1,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,' \
            r'null,null,null,null,null,null,null,null,null,null,null,null,null,null,1,null,null,null,null,null,null,' \
