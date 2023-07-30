@@ -1,5 +1,5 @@
 [project]
-name = "google_image_source_search"
+name = "google-image-source-search"
 version = "0.0.1"
 authors = [
   { name="Vorrik", email="author@example.com" },
@@ -19,8 +19,8 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/pypa/sampleproject"
-"Bug Tracker" = "https://github.com/pypa/sampleproject/issues"
+"Homepage" = "https://github.com/Vorrik/Google-Image-Source-Search"
+"Bug Tracker" = "https://github.com/Vorrik/Google-Image-Source-Search/issues"
 
 [build-system]
 requires = ["setuptools", "wheel"]
