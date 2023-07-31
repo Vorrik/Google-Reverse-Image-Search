@@ -3,6 +3,8 @@
 
 An unofficial simple solution to search image sources. Written on pure requests
 
+![Google lens](https://raw.githubusercontent.com/Vorrik/Google-Image-Source-Search/master/examples/google_lens0.png)
+
 ## Installation
 ```sh
 > pip install google-image-source-search
