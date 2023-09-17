@@ -1,4 +1,4 @@
-# Google Image Source Search
+# Google Reverse Image Search
 [![PyPI version](https://badge.fury.io/py/google-image-source-search.svg)](https://badge.fury.io/py/google-image-source-search)
 
 An unofficial simple solution to search image sources. Written on pure requests
