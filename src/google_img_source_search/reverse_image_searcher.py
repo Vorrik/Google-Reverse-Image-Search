@@ -19,6 +19,45 @@ class ReverseImageSearcher:
 
     def upload_image(self, image_url: str) -> Image:
         upload_response = self.session.get(f'{self.url}/uploadbyurl', params={'url': image_url}, allow_redirects=True)
+
+        upload_response_txt = upload_response.text
+        if "If you choose to “Reject all,” we will not use cookies" in upload_response_txt:
+            # Need a way to click that damn button
+            print("Need to consent first...")
+
+            # This is an ugly piece of code, but it works.
+            srch_qry = "Reject all</span></button></div></div>"
+            a = upload_response_txt.index(srch_qry) + len(srch_qry)
+            load = {}
+            while True:
+                start = upload_response_txt.find('<', a)
+                end = upload_response_txt.find('>', start + 1)
+                a = end + 1
+                e = upload_response_txt[start:end + 1]
+                if e.startswith('<input'):
+                    parts = e.split('"')
+                    k, v = None, None
+                    # Let's cycle through this, to make sure it works even when the order of the elements changes
+                    p_idx = 0
+                    while True:
+                        if p_idx >= len(parts):
+                            break
+                        p = parts[p_idx].strip()
+                        p_idx += 1
+                        if p == 'name=':
+                            k = parts[p_idx]
+                            p_idx += 1
+                        elif p == 'value=':
+                            v = parts[p_idx]
+                            p_idx += 1
+                    if k is not None and v is not None:
+                        load[k] = v
+                else:
+                    break
+
+            upload_response = self.session.post(f'https://consent.google.com/save', data=load, allow_redirects=True)
+            upload_response_txt = upload_response.text
+
         return ApiResponseParser.extract_image(upload_response.text)
 
     def search_image_src(self, image: Image) -> list[SearchItem]:
