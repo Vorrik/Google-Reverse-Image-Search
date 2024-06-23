@@ -1,7 +1,7 @@
 # Google Reverse Image Search
 [![PyPI version](https://badge.fury.io/py/google-image-source-search.svg)](https://badge.fury.io/py/google-image-source-search)
 
-An unofficial simple solution to search image sources. Written on pure requests
+An unofficial simple solution to search web pages using the specified image. Written on pure requests
 
 ![Google lens](https://raw.githubusercontent.com/Vorrik/Google-Image-Source-Search/master/examples/google_lens0.png)
 
@@ -25,6 +25,17 @@ if __name__ == '__main__':
         print(f'Title: {search_item.page_title}')
         print(f'Site: {search_item.page_url}')
         print(f'Img: {search_item.image_url}\n')
+```
+#### Switching safe mode
+```py
+from google_img_source_search import SafeMode
+rev_img_searcher.switch_safe_mode(SafeMode.DISABLED)
+```
+#### Passing custom session
+```py
+import requests
+session = requests.Session()
+rev_img_searcher = ReverseImageSearcher(session)
 ```
 
 ### Results
