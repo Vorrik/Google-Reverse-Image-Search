@@ -12,6 +12,10 @@ class TestReverseImageSearcher(unittest.TestCase):
                                                      '/c450352ac6ea8645ead206721673e8fb.png')
         self.assertTrue(results, 'No results')
 
+    def test_search_by_file(self):
+        results = self.reverse_image_searcher.search_by_file('test.png')
+        self.assertTrue(results, 'No results')
+
     def test_switch_safe_mode(self):
         self.reverse_image_searcher.switch_safe_mode(SafeMode.DISABLED)
         self.reverse_image_searcher.switch_safe_mode(SafeMode.BLUR)

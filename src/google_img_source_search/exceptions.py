@@ -2,7 +2,15 @@ class GoogleImageSearcherError(Exception):
     pass
 
 
-class InvalidImageURL(GoogleImageSearcherError):
+class ImageUploadError(GoogleImageSearcherError):
+    pass
+
+
+class InvalidImageURL(ImageUploadError):
+    pass
+
+
+class InvalidOrUnsupportedImageFile(ImageUploadError):
     pass
 
 

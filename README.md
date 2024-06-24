@@ -26,6 +26,10 @@ if __name__ == '__main__':
         print(f'Site: {search_item.page_url}')
         print(f'Img: {search_item.image_url}\n')
 ```
+#### Searching by file
+```py
+rev_img_searcher.search_by_file('test.png')
+```
 #### Switching safe mode
 ```py
 from google_img_source_search import SafeMode

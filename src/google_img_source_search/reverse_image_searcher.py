@@ -6,13 +6,15 @@ from .safe_modes import SafeMode
 from .exceptions import SafeModeSwitchError
 
 from .image_uploader import ImageUploader
+from .image_file_uploader import ImageFileUploader
 from .image_source_searcher import ImageSourceSearcher
 
 
 class ReverseImageSearcher:
-    def __init__(self, session=None, image_uploader=None, image_source_searcher=None):
+    def __init__(self, session=None, image_uploader=None, image_file_uploader=None, image_source_searcher=None):
         self.session = session or Session()
         self.image_uploader = image_uploader or ImageUploader(self.session)
+        self.image_file_uploader = image_file_uploader or ImageFileUploader(self.session)
         self.image_source_searcher = image_source_searcher or ImageSourceSearcher(self.session)
 
         self.session.headers.update(
@@ -35,11 +37,22 @@ class ReverseImageSearcher:
         if switch_response.status_code != 204:
             raise SafeModeSwitchError()
 
+    def __search(self, image_uploader: ImageUploader, image: str) -> list[SearchItem]:
+        google_image = image_uploader.upload(image)
+        return self.image_source_searcher.search(google_image)
+
     def search(self, image_url: str) -> list[SearchItem]:
         """
-        Searches for web pages using the specified image
+        Searches for web pages using the specified image. By image url
         :return: list of search items (page url, title, image url)
         """
 
-        google_image = self.image_uploader.upload(image_url)
-        return self.image_source_searcher.search(google_image)
+        return self.__search(self.image_uploader, image_url)
+
+    def search_by_file(self, image_path: str) -> list[SearchItem]:
+        """
+        Searches for web pages using the specified image. By image file path
+        :return: list of search items (page url, title, image url)
+        """
+
+        return self.__search(self.image_file_uploader, image_path)
