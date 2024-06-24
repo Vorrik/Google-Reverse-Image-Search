@@ -1,3 +1,5 @@
+import mimetypes
+import os
 import re
 import json
 from requests import Session
@@ -23,7 +25,15 @@ class ImageUploader:
         return Image(id_1, id_2)
 
     def upload(self, image_url: str) -> Image:
-        upload_response = self.session.get('https://lens.google.com/uploadbyurl', params={'url': image_url})
+        # Check if not URL, it Path!
+        re_http = re.compile(r'^https?:')
+        if not re_http.match(image_url) and os.path.exists(image_url):
+            file_name = os.path.basename(image_url)
+            mime_type, encoding = mimetypes.guess_type(image_url)
+            files = [('encoded_image', (file_name, open(image_url, 'rb'), mime_type))]
+            upload_response = self.session.post("https://lens.google.com/v3/upload", files=files)
+        else:
+            upload_response = self.session.get('https://lens.google.com/uploadbyurl', params={'url': image_url})
 
         if "{'ds:0'" not in upload_response.text:
             raise InvalidImageURL()
