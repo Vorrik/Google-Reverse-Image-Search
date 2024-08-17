@@ -20,6 +20,13 @@ class ReverseImageSearcher:
         self.session.headers.update(
             {'User-agent': 'Mozilla/5.0 (X11; Linux x86_64; rv:103.0) Gecko/20100101 Firefox/103.0'}
         )
+
+        # Bypassing EU consent request
+        self.session.cookies.update({
+            'CONSENT': 'PENDING+987',
+            'SOCS': 'CAESHAgBEhJnd3NfMjAyMzA4MTAtMF9SQzIaAmRlIAEaBgiAo_CmBg'
+        })
+
         self.session.hooks = {
             'response': lambda r, *args, **kwargs: r.raise_for_status()
         }
