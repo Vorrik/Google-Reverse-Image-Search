@@ -1,5 +1,5 @@
 # Google Reverse Image Search
-[![PyPI version](https://badge.fury.io/py/google-image-source-search.svg??)](https://badge.fury.io/py/google-image-source-search)
+[![PyPI version](https://badge.fury.io/py/google-image-source-search.svg?)](https://badge.fury.io/py/google-image-source-search)
 
 An unofficial simple solution to search web pages using the specified image. Written on pure requests
 
